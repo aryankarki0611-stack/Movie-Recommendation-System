@@ -9,7 +9,7 @@ load_dotenv()
 
 # ---------------- PAGE CONFIG ----------------
 st.set_page_config(
-    page_title="CineMatch | Discover Movies",
+    page_title="Cinevo | Discover Movies",
     page_icon="🎬",
     layout="wide",
     initial_sidebar_state="collapsed",
@@ -112,8 +112,60 @@ st.markdown("""
 }
 
 .hero-content {
-    max-width: 650px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 36px;
+    width: 100%;
+    box-sizing: border-box;
     padding: 48px 44px;
+}
+
+.hero-left {
+    flex: 1;
+    min-width: 0;
+}
+
+.team-card {
+    width: 260px;
+    flex-shrink: 0;
+    padding: 22px;
+    border-radius: 18px;
+    background: rgba(20, 15, 35, 0.78);
+    border: 1px solid rgba(167, 139, 250, 0.35);
+    backdrop-filter: blur(10px);
+    box-sizing: border-box;
+}
+
+.team-card-title {
+    color: #c4b5fd;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    margin-bottom: 18px;
+}
+
+.team-member {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 11px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+.team-member:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.team-member strong {
+    color: #ffffff;
+    font-size: 14px;
+}
+
+.team-member span {
+    color: #c4b5fd;
+    font-size: 12px;
 }
 
 .eyebrow {
@@ -421,23 +473,31 @@ def fetch_poster(movie_id, movie_title):
 st.markdown("""
 <div class="navbar">
     <div class="logo-mark">🎬</div>
-    <div class="logo-name">Cine<span>Match</span></div>
+    <div class="logo-name">Cinevo</div>
     <div class="nav-note">MOVIE DISCOVERY&nbsp; ✦</div>
 </div>
 """, unsafe_allow_html=True)
 
 # ---------------- CINEMATIC HERO ----------------
-st.markdown("""
+hero_html = """
 <section class="hero">
     <div class="hero-content">
-        <div class="eyebrow">✦ YOUR PERSONAL MOVIE GUIDE</div>
-        <h1>Your next movie<br>night starts here.</h1>
-        <p>Pick a movie you love. Discover your next favourite with
-        recommendations powered by machine learning.</p>
+        <div class="hero-left">
+            <div class="eyebrow">✦ YOUR PERSONAL MOVIE GUIDE</div>
+            <h1>Your next movie<br>night starts here.</h1>
+            <p>Pick a movie you love. Discover your next favourite with recommendations powered by machine learning.</p>
+        </div>
+        <div class="team-card">
+            <div class="team-card-title">PROJECT TEAM</div>
+            <div class="team-member"><strong>Aryan Singh</strong><span>26BCS11427</span></div>
+            <div class="team-member"><strong>Mohammad Rehan</strong><span>26BCS11428</span></div>
+            <div class="team-member"><strong>Vansh Kataria</strong><span>26BCS11452</span></div>
+        </div>
     </div>
 </section>
-""", unsafe_allow_html=True)
+"""
 
+st.markdown(hero_html, unsafe_allow_html=True)
 # ---------------- MOVIE SEARCH ----------------
 st.markdown(
     '<div class="section-heading">Find your next watch</div>'
@@ -580,6 +640,6 @@ with step3:
 
 st.markdown("""
 <div class="footer">
-    CINEMATCH &nbsp;·&nbsp; MADE WITH PYTHON, STREAMLIT & MACHINE LEARNING
+    CINEVO &nbsp;·&nbsp; MADE WITH PYTHON, STREAMLIT & MACHINE LEARNING
 </div>
 """, unsafe_allow_html=True)
