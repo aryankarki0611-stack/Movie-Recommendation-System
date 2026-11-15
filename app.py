@@ -392,11 +392,31 @@ hr {
 """, unsafe_allow_html=True)
 
 # ---------------- LOAD DATA ----------------
+
 @st.cache_resource
 def load_movie_data():
-    with open("movie_data.pkl", "rb") as file:
+    model_path = "/tmp/cinevo_movie_data.pkl"
+
+    if not os.path.exists(model_path):
+        url = (
+            "https://huggingface.co/"
+            "aryankarkii/cinevo-movie-data/"
+            "resolve/main/movie_data.pkl"
+        )
+
+        with requests.get(url, stream=True, timeout=120) as response:
+            response.raise_for_status()
+
+            with open(model_path, "wb") as file:
+                for chunk in response.iter_content(chunk_size=1024 * 1024):
+                    if chunk:
+                        file.write(chunk)
+
+    with open(model_path, "rb") as file:
         movie_data, similarity = pickle.load(file)
+
     return movie_data, similarity
+
 
 try:
     movies, cosine_sim = load_movie_data()
